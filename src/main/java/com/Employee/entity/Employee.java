@@ -21,7 +21,7 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column
-	private int eid;
+	private Integer eid;
 	@Column
 	private String ename;
 	@Column

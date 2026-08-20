@@ -3,10 +3,13 @@ package com.Employee.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.Employee.entity.Employee;
+import com.Employee.exception.EmployeeNotFoundException;
 import com.Employee.repository.EmployeeRepository;
 
+@Service
 public class EmployeeService {
 	
 	@Autowired
@@ -19,7 +22,7 @@ public class EmployeeService {
 		return employeeRepository.findAll();
 	}
 	public Employee getEmployeeById(int eid) {
-		return employeeRepository.findById(eid).orElseThrow(() -> new RuntimeException());
+		return employeeRepository.findById(eid).orElseThrow(() -> new EmployeeNotFoundException("Employee not found with id:"+ eid));
 	}
 	public Employee updateEmployee(int eid, Employee updatedEmployee) {
 		Employee existing = getEmployeeById(eid);
@@ -31,7 +34,7 @@ public class EmployeeService {
 	}
 	public void deleteEmployee(int eid) {
 		if(!employeeRepository.existsById(eid)) {
-			throw new RuntimeException("Employee not found");
+			throw new EmployeeNotFoundException("Employee not found");
 		}
 		employeeRepository.deleteById(eid);
 	}
