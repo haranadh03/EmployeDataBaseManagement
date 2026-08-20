@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,11 +26,16 @@ public class Employee {
 	@Column
 	private Integer eid;
 	@Column
+	@NotBlank(message = "Employee name is required")
 	private String ename;
 	@Column
+	@NotBlank(message="Employee role is required")
 	private String erole;
 	@Column
-	private double esalary;
+	@NotNull(message="Salary is required")
+	@Positive(message="Salary must be greater than zero")
+	private Double esalary;
 	@Column
+	@NotBlank(message="Date of joining is required")
 	private String edoj;
 }

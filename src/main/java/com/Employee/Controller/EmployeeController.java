@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Employee.entity.Employee;
 import com.Employee.service.EmployeeService;
 
+import jakarta.validation.Valid;
+
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("api/employees")
 public class EmployeeController {
@@ -24,7 +28,7 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 	
 	@PostMapping
-	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
+	public ResponseEntity<Employee> addEmployee(@Valid @RequestBody Employee employee){
 		Employee saved =employeeService.addEmployee(employee);
 		return new ResponseEntity<>(saved, HttpStatus.CREATED);
 	}
@@ -41,7 +45,7 @@ public class EmployeeController {
 
     // UPDATE
     @PutMapping("/{eid}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable int eid, @RequestBody Employee employee) {
+    public ResponseEntity<Employee> updateEmployee(@Valid @PathVariable int eid, @RequestBody Employee employee) {
         return ResponseEntity.ok(employeeService.updateEmployee(eid, employee));
     }
 
