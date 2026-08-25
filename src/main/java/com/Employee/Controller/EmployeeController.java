@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Employee.dto.EmployeeDto;
 import com.Employee.entity.Employee;
 import com.Employee.service.EmployeeService;
 
@@ -29,7 +30,7 @@ public class EmployeeController {
 	
 	@PostMapping
 	public ResponseEntity<Employee> addEmployee(@Valid @RequestBody Employee employee){
-		Employee saved =employeeService.addEmployee(employee);
+		EmployeeDto saved =employeeService.addEmployee(employee);
 		return new ResponseEntity<>(saved, HttpStatus.CREATED);
 	}
 	@GetMapping
